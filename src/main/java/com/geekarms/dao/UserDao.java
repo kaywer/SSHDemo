@@ -1,5 +1,7 @@
 package com.geekarms.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,9 @@ public class UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public User getAllUser(){
+	public List<User> getAllUser(){
 		Session session = sessionFactory.getCurrentSession();
-		User user = session.find(User.class, 1L);
-		return user;
+		return session.createQuery("From User", User.class).getResultList();
 	}
 
 }
